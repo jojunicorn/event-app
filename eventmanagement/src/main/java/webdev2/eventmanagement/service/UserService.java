@@ -8,14 +8,17 @@ import webdev2.eventmanagement.exception.DuplicateResourceException;
 import webdev2.eventmanagement.exception.InvalidOperationException;
 import webdev2.eventmanagement.exception.ResourceNotFoundException;
 import webdev2.eventmanagement.model.User;
+import webdev2.eventmanagement.model.dto.LoginResponse;
 import webdev2.eventmanagement.model.dto.UserRequest;
 import webdev2.eventmanagement.model.dto.UserResponse;
+import webdev2.eventmanagement.model.enums.Role;
 import webdev2.eventmanagement.repository.UserRepository;
 
 import javax.naming.AuthenticationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static webdev2.eventmanagement.util.PasswordHashingUtil.*;
 
@@ -41,7 +44,7 @@ public class UserService {
 
         return users.map(user -> new UserResponse(
                 user.getId(),
-                user.getUsername(),
+                user.getName(),
                 user.getEmail(),
                 user.getRole(),
                 user.getBirthdate(),
@@ -49,6 +52,21 @@ public class UserService {
                 user.getLocation()
         ));
     }
+
+    public List<UserResponse> getAllOrganizerRequests() {
+        List<User> users = userRepository.findAllByRole(Role.REQUESTED_ORGANIZER);
+
+        return users.stream().map(user -> new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRole(),
+                user.getBirthdate(),
+                user.getPreferences(),
+                user.getLocation()
+        )).toList();
+    }
+
 
     public UserResponse getUserById(String id) {
         User user =  userRepository.findById(id)
@@ -67,6 +85,14 @@ public class UserService {
     public void deleteUser(String id) {
         // TODO check if user is connected to event
         userRepository.deleteById(id);
+    }
+
+    public void updateUserRole(String id, Role role) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        user.setRole(role);
+        userRepository.save(user);
     }
 
     public User addUser(UserRequest userRequest) {
@@ -111,10 +137,11 @@ public class UserService {
         else throw new AuthenticationException("Invalid username/password");
     }
 
-    public String tokenProvider(String email, String password) throws Exception {
+    public LoginResponse tokenProvider(String email, String password) throws Exception {
         User user = login(email, password);
         String token = jwtService.generateJwtToken(user);
-        return token;
+        LoginResponse loginResponse = new LoginResponse(token, user.getRole(), user.getId());
+        return loginResponse;
     }
 
     public User getUserByEmail(String email) {

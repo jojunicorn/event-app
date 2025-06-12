@@ -1,0 +1,86 @@
+.navbar {
+  background-color: #400d52; /* blue-600 */
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Orbitron', 'Courier New', monospace;
+
+}
+
+.navbarContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+}
+
+.navLinks {
+  display: none;
+}
+
+.navLinks a, .navLinks button {
+  margin-left: 1rem;
+  color: white;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.navLinks a:hover, .navLinks button:hover {
+  color: #bfdbfe; /* blue-300 */
+}
+
+.menuButton {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.navLinks {
+  display: none;
+}
+
+.mobileLinks {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navLinks {
+    display: flex;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}
+
+.mobileLinks {
+  display: block;
+  background-color: #400d52;
+  padding: 1rem;
+}
+
+.mobileLinks a,
+.mobileLinks button {
+  display: block;
+  padding: 0.5rem 0;
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+}
+

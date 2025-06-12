@@ -17,8 +17,8 @@ public class Event {
     private String location;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private EventType eventType;
+    private String eventType;
     private int maxParticipants;
     private AccessType accessType;
-    private User organizer;
+    private String organizerId;
 }

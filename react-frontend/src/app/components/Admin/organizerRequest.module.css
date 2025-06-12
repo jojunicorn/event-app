@@ -1,0 +1,112 @@
+.container {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: linear-gradient(to right, #f0f4ff, #ffffff);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2b2b2b;
+    margin-bottom: 2rem;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.empty {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.requestList {
+    width: 500px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(200, 200, 255, 0.3);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.card p {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.actions button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.approve {
+    background-color: #28a745;
+    color: white;
+}
+
+.deny {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .requestList {
+        width: 100%;
+    }
+
+    .card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .actions {
+        align-self: flex-end;
+    }
+}

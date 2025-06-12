@@ -1,0 +1,227 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #0a0a0a; /* very dark background */
+  min-height: 100vh;
+  color: #00fff7; /* neon cyan text base */
+  font-family: 'Orbitron', 'Courier New', monospace;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #00fff7;
+  text-shadow:
+    0 0 5px #00fff7,
+    0 0 10px #00fff7,
+    0 0 20px #00fff7,
+    0 0 40px #0ff;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #111; /* dark card bg */
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #00fff7;
+  box-shadow:
+    0 0 10px #00fff7,
+    inset 0 0 10px #00fff7;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 20px #00fff7,
+    0 0 40px #0ff,
+    inset 0 0 20px #0ff;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: #00fff7;
+  text-shadow:
+    0 0 5px #00fff7,
+    0 0 10px #0ff,
+    0 0 15px #0ff;
+}
+
+.location, .date, .time {
+  margin-bottom: 0.4rem;
+  color: #0ff;
+  text-shadow:
+    0 0 3px #0ff,
+    0 0 6px #0ff;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.filterWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterLabel {
+  font-size: 1rem;
+  color: #00fff7;
+  font-weight: 600;
+  text-shadow:
+    0 0 5px #00fff7,
+    0 0 10px #0ff;
+}
+
+.filterSelect,
+.filterInput {
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #00fff7;
+  background-color: #111;
+  color: #0ff;
+  outline: none;
+  box-shadow:
+    0 0 5px #00fff7;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 180px;
+}
+
+.filterSelect:hover,
+.filterInput:hover,
+.filterSelect:focus,
+.filterInput:focus {
+  border-color: #0ff;
+  box-shadow:
+    0 0 10px #0ff,
+    0 0 20px #00fff7;
+}
+
+@media (max-width: 600px) {
+  .filterWrapper {
+    width: 100%;
+  }
+}
+
+.createEventButton {
+  background-color: #e400ff;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #e400ff, 0 0 20px #ff00ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.createEventButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+}
+
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #111;
+  color: #00fff7;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 15px #00fff7, inset 0 0 15px #0ff;
+  position: relative;
+  font-family: 'Orbitron', 'Courier New', monospace;
+  text-shadow: 0 0 5px #00fff7;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #0ff;
+  cursor: pointer;
+  text-shadow: 0 0 10px #0ff;
+}
+
+.closeButton:hover {
+  color: #fff;
+}
+
+.warningMessage {
+  color: #ffae00; /* bright amber warning */
+  font-weight: bold;
+  margin-top: 1rem;
+  text-shadow:
+    0 0 5px #ffae00,
+    0 0 10px #ffaa00,
+    0 0 15px #ffae00;
+}
+
+.fullMessage {
+  color: #ff004c;
+  font-weight: bold;
+  margin-top: 1rem;
+  text-shadow:
+    0 0 5px #ff004c,
+    0 0 10px #ff004c,
+    0 0 20px #ff004c;
+}
+
+.joinButton {
+  background-color: #00fff7;
+  color: #0a0a0a;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-shadow: 0 0 5px #0ff;
+  box-shadow: 0 0 15px #00fff7, 0 0 30px #00fff7, inset 0 0 10px #0ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.joinButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px #0ff, 0 0 50px #00fff7, inset 0 0 20px #0ff;
+  color: #000;
+}

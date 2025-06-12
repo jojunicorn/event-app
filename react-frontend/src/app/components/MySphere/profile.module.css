@@ -1,0 +1,78 @@
+.profileCard {
+  background-color: #121212; /* Dark background */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow:
+    0 0 8px #00fff7,   /* neon glow */
+    0 0 15px #00fff7;
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: left;
+  color: #00fff7; /* Neon cyan text */
+  font-family: 'Orbitron', monospace;
+}
+
+.heading {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #00ffea;
+  text-shadow:
+    0 0 5px #00ffea,
+    0 0 10px #00ffea;
+}
+
+.text {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #0fffcf;
+  text-shadow: 0 0 3px #0fffcf;
+}
+
+.button {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 2px solid #00fff7;
+  color: #00fff7;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: 'Orbitron', monospace;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 8px #00fff7,
+    inset 0 0 5px #00fff7;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #00fff7;
+  color: #121212;
+  box-shadow:
+    0 0 15px #00fff7,
+    inset 0 0 15px #00fff7;
+}
+
+.success {
+  color: #39ff14; /* Neon green */
+  margin-top: 1rem;
+  text-shadow: 0 0 5px #39ff14;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+}
+
+.error {
+  color: #ff073a; /* Neon red */
+  margin-top: 1rem;
+  text-shadow: 0 0 5px #ff073a;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #00fff7;
+  font-family: 'Orbitron', monospace;
+  text-shadow: 0 0 5px #00fff7;
+}

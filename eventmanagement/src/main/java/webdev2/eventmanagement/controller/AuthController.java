@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import webdev2.eventmanagement.model.dto.LoginRequest;
+import webdev2.eventmanagement.model.dto.LoginResponse;
 import webdev2.eventmanagement.service.JwtService;
 import webdev2.eventmanagement.service.UserService;
 
@@ -30,7 +31,7 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
         try {
-            String response = userService.tokenProvider(request.email(), request.password());
+            LoginResponse response = userService.tokenProvider(request.email(), request.password());
             return ResponseEntity.ok(response);
         } catch (AuthenticationException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
