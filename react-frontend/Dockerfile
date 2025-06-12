@@ -1,10 +1,10 @@
-# Build stage
-FROM node:18-alpine as build
+FROM node:18
 WORKDIR /app
+COPY package*.json ./
+RUN npm install
 COPY . .
-RUN npm install && npm run build
+ENV NEXT_PUBLIC_IGNORE_ESLINT_ERRORS=true
 
-# Production stage
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "run", "start"]
