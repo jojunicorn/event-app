@@ -17,22 +17,11 @@ bun dev
 TODO
 
 Admin
-- usermanagement
+- usermanagement -> case what if admin changes back to organizer user (what happens to the events?)
 
 Users
-- preferences, location
 - event browsing
     - event filtering
-- event detail
-- join event (with different accesses)
-- myevents page (upcoming and past visited events)
 
-Organizers
-- add event confirmation message
-- edit event
-- myevents (own, upcoming, past)
 
-Notifications
-- get notifications
-    - backend
-    - notifications for what? preferences?
+ERRORHANDLING

@@ -1,4 +1,5 @@
 import { Roles } from "@/enums/roles"
+import { EventType } from "./event";
 
 export interface UserAuthInfo {
   id: string;
@@ -23,4 +24,9 @@ export interface UserRequest {
     password: string;
     role: Roles;
     birthdate: string;
+}
+
+export interface UserUpdateRequest {
+  location: string;
+  preferences: Array<EventType>;
 }

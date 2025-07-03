@@ -94,7 +94,6 @@
     color: white;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
     .requestList {
         width: 100%;

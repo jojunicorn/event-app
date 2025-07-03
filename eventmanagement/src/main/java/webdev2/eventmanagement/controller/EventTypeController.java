@@ -1,6 +1,7 @@
 package webdev2.eventmanagement.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class EventTypeController {
         this.eventTypeService = eventTypeService;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Object> addEventType(@RequestParam String eventTypeName) {
         try {
@@ -60,6 +62,7 @@ public class EventTypeController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEventType(@PathVariable String id) {
         try {

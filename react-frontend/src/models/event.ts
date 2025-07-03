@@ -5,8 +5,8 @@ export interface Event {
     name: string;
     description: string;
     location: string;
-    startDateTime: Date;
-    endDateTime: Date;
+    startDateTime: string;
+    endDateTime: string;
     eventType: string;
     maxParticipants: number;
     accessType: AccessTypes;
@@ -17,3 +17,4 @@ export interface EventType {
     id: string;
     name: string;
 }
+

@@ -2,9 +2,9 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #0a0a0a; /* very dark background */
+  background-color: #0a0a0a;
   min-height: 100vh;
-  color: #00fff7; /* neon cyan text base */
+  color: #00fff7;
   font-family: 'Orbitron', 'Courier New', monospace;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .card {
-  background-color: #111; /* dark card bg */
+  background-color: #111;
   padding: 1.5rem;
   border-radius: 12px;
   border: 2px solid #00fff7;
@@ -182,7 +182,7 @@
 }
 
 .warningMessage {
-  color: #ffae00; /* bright amber warning */
+  color: #ffae00;
   font-weight: bold;
   margin-top: 1rem;
   text-shadow:
@@ -224,4 +224,43 @@
   transform: translateY(-3px);
   box-shadow: 0 0 25px #0ff, 0 0 50px #00fff7, inset 0 0 20px #0ff;
   color: #000;
+}
+
+.backButton {
+  background-color: transparent;
+  color: #00fff7;
+  border: 1px solid #00fff7;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  text-shadow: 0 0 4px #00fff7;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.backButton:hover {
+  background-color: #00fff7;
+  color: #000;
+}
+.shareButton {
+  background-color: #00fff7;
+  color: #0a0a0a;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 5px #0ff;
+  box-shadow: 0 0 10px #00fff7, inset 0 0 5px #0ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shareButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px #0ff, inset 0 0 10px #00fff7;
 }

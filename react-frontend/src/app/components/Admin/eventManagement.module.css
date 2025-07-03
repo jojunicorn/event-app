@@ -61,3 +61,215 @@
 .delete {
   color: #e74c3c;
 }
+
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.confirmPopup {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  max-width: 350px;
+  text-align: center;
+  font-weight: 600;
+  color: #222;
+}
+
+.popupButtons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirmButton {
+  background-color: #e63946;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.cancelButton {
+  background-color: #ccc;
+  color: #333;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.confirmButton:hover {
+  background-color: #d62828;
+}
+
+.cancelButton:hover {
+  background-color: #bbb;
+}
+
+
+.popup {
+  background-color: #121212;
+  padding: 20px;
+  border-radius: 1rem;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow:
+    0 0 15px #00fff7,
+    inset 0 0 10px #00fff7;
+  color: #00fff7;
+  font-family: 'Orbitron', monospace;
+  text-align: left;
+}
+
+.userList {
+  list-style: none;
+  margin-bottom: 1em;
+  padding: 0;
+}
+
+.userItem {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #00fff7;
+  color: #00fff7;
+  text-shadow:
+    0 0 3px #00fff7;
+}
+
+.userItem:hover {
+  background-color: #00fff7;
+  color: #121212;
+  text-shadow: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: #121212;
+  border: 2px solid #00fff7;
+  border-radius: 0.5rem;
+  color: #00fff7;
+  font-family: 'Orbitron', monospace;
+  text-shadow: 0 0 5px #00fff7;
+  margin-top: 1em;
+}
+
+.closeButton {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid #00fff7;
+  color: #00fff7;
+  border-radius: 0.5rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 8px #00fff7,
+    inset 0 0 5px #00fff7;
+  transition: all 0.3s ease;
+  margin: 1em;
+
+}
+
+.closeButton:hover {
+  background-color: #00fff7;
+  color: #121212;
+  box-shadow:
+    0 0 15px #00fff7,
+    inset 0 0 15px #00fff7;
+}
+
+
+.approvalContainer {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+.heading {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.userList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.userItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.userInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+}
+
+.userEmail {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.approveButton,
+.rejectButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.approveButton:hover {
+  background: #e0ffe0;
+  color: green;
+}
+
+.rejectButton:hover {
+  background: #ffe0e0;
+  color: red;
+}

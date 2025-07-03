@@ -1,0 +1,10 @@
+{"_id":{"$oid":"684acae5a367e73316c7bacf"},"name":"Sport","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"684acae9a367e73316c7bad0"},"name":"Conference","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"68544e49820ec40963945848"},"name":"Club","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"6857c22e6346510ada920190"},"name":"Dance","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"6857c2336346510ada920191"},"name":"Rooftop","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"6857c3306346510ada920194"},"name":"Music","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"6857c33a6346510ada920195"},"name":"Art & Culture","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"6857c3446346510ada920196"},"name":"Social & Networking","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"6857c34a6346510ada920197"},"name":"Health & Wellness","_class":"webdev2.eventmanagement.model.EventType"}
+{"_id":{"$oid":"6857c3556346510ada920198"},"name":"Business","_class":"webdev2.eventmanagement.model.EventType"}

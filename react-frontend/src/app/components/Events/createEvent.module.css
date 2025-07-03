@@ -58,3 +58,38 @@
 .button:hover {
   background-color: #452f6f;
 }
+
+.successPopup {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow:
+    0 0 8px #4BB543,
+    0 0 20px #4BB543,
+    0 0 30px #4BB543;
+  z-index: 1000;
+  animation: fadeInOut 2s forwards;
+  height: 100px;
+}
+
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

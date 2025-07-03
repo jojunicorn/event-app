@@ -11,14 +11,13 @@ import webdev2.eventmanagement.model.User;
 import webdev2.eventmanagement.model.dto.LoginResponse;
 import webdev2.eventmanagement.model.dto.UserRequest;
 import webdev2.eventmanagement.model.dto.UserResponse;
+import webdev2.eventmanagement.model.dto.UserUpdateRequest;
 import webdev2.eventmanagement.model.enums.Role;
 import webdev2.eventmanagement.repository.UserRepository;
 
 import javax.naming.AuthenticationException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static webdev2.eventmanagement.util.PasswordHashingUtil.*;
 
@@ -83,7 +82,6 @@ public class UserService {
     }
 
     public void deleteUser(String id) {
-        // TODO check if user is connected to event
         userRepository.deleteById(id);
     }
 
@@ -92,6 +90,16 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
 
         user.setRole(role);
+        userRepository.save(user);
+    }
+
+    public void updateUserPreferences(String id, UserUpdateRequest preferences) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        user.setLocation(preferences.location());
+        user.setPreferences(preferences.preferences());
+
         userRepository.save(user);
     }
 

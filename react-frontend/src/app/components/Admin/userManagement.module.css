@@ -20,7 +20,6 @@
   margin-bottom: 1rem;
 }
 
-/* Responsive wrapper */
 .tableWrapper {
   overflow-x: auto;
   width: 100%;
@@ -59,7 +58,7 @@
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #333; /* Ensure readable text */
+  color: #333;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
@@ -90,7 +89,7 @@
 
 @media (max-width: 768px) {
   .table {
-    display: none; /* Hide ugly table on mobile */
+    display: none;
   }
 
   .userCard {
@@ -137,7 +136,7 @@
 }
 @media (min-width: 769px) {
   .userCard {
-    display: none; /* Hide card layout on desktop */
+    display: none;
   }
 
   .table {

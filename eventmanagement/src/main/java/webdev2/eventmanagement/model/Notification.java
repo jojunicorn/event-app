@@ -15,4 +15,6 @@ public class Notification {
     private String message;
     private String userId;
     private LocalDateTime createdAt;
+    private boolean readStatus;
+    private String actionUrl;
 }

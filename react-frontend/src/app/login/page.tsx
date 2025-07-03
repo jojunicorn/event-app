@@ -1,4 +1,3 @@
-// pages/login.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -50,7 +49,6 @@ const LoginPage = () => {
       const response = await login(loginRequest);
       const { token, role, userId } = response;
 
-      // Store the token and userId in localStorage
       contextLogin(token, role, userId);
 
       setSuccessMessage('Login successful');
@@ -69,7 +67,7 @@ const LoginPage = () => {
     setRegisteringMessage('');
     const formattedRequest = {
       ...registerRequest,
-      birthdate: new Date(registerRequest.birthdate).toISOString() // important!
+      birthdate: new Date(registerRequest.birthdate).toISOString()
     };
 
     try {

@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #400d52; /* blue-600 */
+  background-color: #400d52;
   color: white;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -38,7 +38,7 @@
 }
 
 .navLinks a:hover, .navLinks button:hover {
-  color: #bfdbfe; /* blue-300 */
+  color: #bfdbfe;
 }
 
 .menuButton {
@@ -84,3 +84,17 @@
   text-align: left;
 }
 
+.notificationIcon {
+  position: relative;
+  display: inline-block;
+}
+
+.unreadDot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+}

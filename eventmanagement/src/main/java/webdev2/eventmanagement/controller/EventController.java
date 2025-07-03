@@ -49,10 +49,6 @@ public class EventController {
                                             @RequestParam(defaultValue = "10") int size) {
         try {
             List<Event> events = eventService.getEvents(organizerId, eventType, accessType, location, startDateTime, page, size);
-            if (events.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("No events found for the provided filters");
-            }
             return ResponseEntity.ok(events);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -61,7 +57,6 @@ public class EventController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'ORGANIZER', 'USER')")
     @GetMapping("/{id}")
     public ResponseEntity<Object> getEventById(@PathVariable String id) {
         try {

@@ -1,6 +1,6 @@
 import axios from "@/axios";
 import AccessTypes from "@/enums/accessTypes";
-import {Event} from "@/models/event";
+import { Event } from "@/models/event";
 
 interface GetEventsParams {
   organizerId?: string;
@@ -24,9 +24,7 @@ export const getEvents = async (params: GetEventsParams) => {
     if (params.page) queryParams.append('page', params.page.toString());
     if (params.size) queryParams.append('size', params.size.toString());
 
-    const response = await axios.get(`/events?${queryParams.toString()}`, {
-      headers: { skipAuth: true }
-    });
+    const response = await axios.get(`/events?${queryParams.toString()}`);
 
     return response.data;
   } catch (error) {
@@ -36,9 +34,7 @@ export const getEvents = async (params: GetEventsParams) => {
 };
 
 export const getEventTypes = async () => {
-  const response = await axios.get(`/eventType`, {
-      headers: { skipAuth: true }
-    });
+  const response = await axios.get(`/eventType`);
   return response.data;
 }
 
@@ -50,8 +46,8 @@ export const addEventType = async (eventTypeName: string) => {
 };
 
 export const deleteEventType = async (id: string) => {
-    const response = await axios.delete(`/eventType/${id}`);
-    return response.data;
+  const response = await axios.delete(`/eventType/${id}`);
+  return response.data;
 };
 
 export const createEvent = async (eventRequest: Event) => {
@@ -59,12 +55,23 @@ export const createEvent = async (eventRequest: Event) => {
   return response.data;
 };
 
+export const updateEvent = async (id: string, eventRequest: Event) => {
+  const response = await axios.put(`/events/${id}`, eventRequest);
+  return response.data;
+};
+
 export const deleteEventById = async (id: string) => {
-    const response = await axios.delete(`/events/${id}`);
-    return response.data;
+  const response = await axios.delete(`/events/${id}`);
+  return response.data;
 };
 
 export const getEventsForUser = async (userId: string) => {
-  const response = await axios.get(`/eventUsers/${userId}`);
+  console.log(userId);
+  const response = await axios.get(`/eventUsers/user/${userId}`);
   return response.data;
 }
+
+export const getEventById = async (id: string) => {
+  const response = await axios.get(`/events/${id}`);
+  return response.data;
+};

@@ -1,0 +1,97 @@
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    color: #f1f1f1;
+    font-family: 'Inter', sans-serif;
+}
+
+.heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #f5f5f5;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    color: #e2e2e2;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+.cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: #1c1c1c;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #333;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #c7c7c7;
+    margin: 0.25rem 0;
+}
+
+.tag {
+    display: inline-block;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.4rem;
+    margin-top: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cardPast {
+    opacity: 0.7;
+    background-color: #111;
+}
+
+.empty {
+    color: #999;
+    font-style: italic;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.unjoinButton {
+    margin-top: 0.5rem;
+    padding: 0.4rem 1rem;
+    background-color: #ff3b3b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.unjoinButton:hover {
+    background-color: #cc2e2e;
+}

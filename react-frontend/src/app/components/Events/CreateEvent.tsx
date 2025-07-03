@@ -4,13 +4,8 @@ import { useState, useEffect } from 'react';
 import styles from './createEvent.module.css';
 import { getEventTypes, createEvent } from '@/apiCalls/event';
 import AccessTypes from "@/enums/accessTypes";
-import { Event } from "@/models/event";
+import { Event, EventType } from "@/models/event";
 import { useRouter } from 'next/navigation';
-
-interface EventTypeItem {
-    id: string;
-    name: string;
-}
 
 interface EventRequest {
     name: string;
@@ -25,7 +20,7 @@ interface EventRequest {
 
 export default function CreateEvent() {
     const router = useRouter();
-    const [eventTypes, setEventTypes] = useState<EventTypeItem[]>([]);
+    const [eventTypes, setEventTypes] = useState<EventType[]>([]);
     const [form, setForm] = useState<EventRequest>({
         name: '',
         description: '',
@@ -36,6 +31,8 @@ export default function CreateEvent() {
         eventType: '',
         accessType: AccessTypes.public_access
     });
+
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
     useEffect(() => {
         const fetchEventTypes = async () => {
@@ -63,6 +60,12 @@ export default function CreateEvent() {
         }));
     };
 
+    function toLocalDatetimeInputValue(dateStr: string): string {
+        const date = new Date(dateStr);
+        const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+        return local.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:mm'
+    }
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -76,19 +79,37 @@ export default function CreateEvent() {
         const eventToSend: Event = {
             ...form,
             id: undefined,
-            startDateTime: new Date(form.startDateTime),
-            endDateTime: new Date(form.endDateTime),
+            startDateTime: toLocalDatetimeInputValue(form.startDateTime),
+            endDateTime: toLocalDatetimeInputValue(form.endDateTime),
+
             organizerId: userId
         };
 
         try {
             const createdEvent = await createEvent(eventToSend);
             console.log('Event created successfully:', createdEvent);
-            alert('Event created successfully!');
-            //TODO push to my events page
+
+            setShowSuccessPopup(true);
+
+            setForm({
+                name: '',
+                description: '',
+                location: '',
+                startDateTime: '',
+                endDateTime: '',
+                maxParticipants: 0,
+                eventType: '',
+                accessType: AccessTypes.public_access
+            });
+
+            setTimeout(() => {
+                setShowSuccessPopup(false);
+                router.push('/mySphere');
+            }, 2000);
+
         } catch (error) {
             console.error('Failed to create event:', error);
-            alert('Failed to create event. Please try again.');
+            window.dispatchEvent(new CustomEvent('global-error', { detail: "Failed to create event." }));
         }
     };
 
@@ -96,7 +117,15 @@ export default function CreateEvent() {
     return (
         <div className={styles.container}>
             <h1 className={styles.heading}>Create New Event</h1>
+
+            {showSuccessPopup && (
+                <div className={styles.successPopup}>
+                    Event created successfully!
+                </div>
+            )}
+
             <form onSubmit={handleSubmit} className={styles.form}>
+                {/* form fields as before */}
                 <label className={styles.label}>
                     Name:
                     <input name="name" type="text" value={form.name} onChange={handleChange} className={styles.input} required />
@@ -129,7 +158,7 @@ export default function CreateEvent() {
                     <input
                         name="endDateTime"
                         type="datetime-local"
-                        value={(form.endDateTime)}
+                        value={form.endDateTime}
                         onChange={handleChange}
                         className={styles.input}
                         required
@@ -138,7 +167,7 @@ export default function CreateEvent() {
 
                 <label className={styles.label}>
                     Max Participants:
-                    <input name="maxParticipants" type="number" value={form.maxParticipants} onChange={handleChange} className={styles.input} required />
+                    <input name="maxParticipants" type="number" min="1" value={form.maxParticipants} onChange={handleChange} className={styles.input} required />
                 </label>
 
                 <label className={styles.label}>

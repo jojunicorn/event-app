@@ -1,6 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { getNotificationsForUser } from '@/apiCalls/notification';
+import { Notification } from '@/models/notification';
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -8,7 +10,10 @@ interface AuthContextType {
   userId: string | null;
   login: (token: string, role: string, userId: string) => void;
   logout: () => void;
+  notifications: Notification[]; // Add this
+  hasUnreadNotifications: boolean; // And this
 }
+
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -16,6 +21,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -26,6 +33,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setIsLoggedIn(true);
       setUserRole(role);
       setUserId(id);
+
+      getNotificationsForUser(id).then(data => {
+        setNotifications(data);
+        setHasUnreadNotifications(data.some((n: Notification) => !n.readStatus));
+      }).catch(err => console.error("Error fetching notifications:", err));
     }
   }, []);
 
@@ -50,9 +62,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userRole, userId, login, logout }}>
+    <AuthContext.Provider value={{
+      isLoggedIn,
+      userRole,
+      userId,
+      login,
+      logout,
+      notifications,
+      hasUnreadNotifications
+    }}>
       {children}
     </AuthContext.Provider>
+
   );
 };
 

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import webdev2.eventmanagement.exception.DuplicateResourceException;
-import webdev2.eventmanagement.exception.InvalidOperationException;
 import webdev2.eventmanagement.exception.ResourceNotFoundException;
+import webdev2.eventmanagement.model.User;
 import webdev2.eventmanagement.model.dto.UserRequest;
 import webdev2.eventmanagement.model.dto.UserResponse;
+import webdev2.eventmanagement.model.dto.UserUpdateRequest;
 import webdev2.eventmanagement.model.enums.Role;
 import webdev2.eventmanagement.service.UserService;
 
@@ -72,8 +73,8 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody UserRequest userRequest, HttpServletRequest request) {
         try {
-            userService.addUser(userRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            User newUser = userService.addUser(userRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newUser.getId());
         } catch (DuplicateResourceException ex) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         } catch (Exception e) {
@@ -94,8 +95,17 @@ public class UserController {
     @PostMapping("/{id}")
     public ResponseEntity<Object> updateUserRole(@PathVariable String id, @RequestParam Role role, HttpServletRequest request) {
         try {
-            System.out.println(role);
             userService.updateUserRole(id, role);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateUserPreferences(@PathVariable String id, @RequestBody UserUpdateRequest updateRequest, HttpServletRequest request) {
+        try {
+            userService.updateUserPreferences(id, updateRequest);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

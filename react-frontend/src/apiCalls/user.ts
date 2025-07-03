@@ -1,5 +1,5 @@
 import axios from "@/axios";
-import { UserRequest } from "@/models/user";
+import { UserRequest, UserUpdateRequest } from "@/models/user";
 import { Roles } from "@/enums/roles"
 
 
@@ -35,5 +35,10 @@ export const getAllOrganizerRequests = async () => {
 
 export const deleteUserById = async (id: string) => {
     const response = await axios.delete(`/users/${id}`);
+    return response.data;
+};
+
+export const updateUser = async (id: string, userRequest: UserUpdateRequest) => {
+    const response = await axios.put(`/users/${id}`, userRequest);
     return response.data;
 };

@@ -22,6 +22,24 @@ services:
     depends_on:
       - mongodb
 
+  mongo-seed:
+    image: mongo
+    restart: no
+    depends_on:
+      - mongodb
+    volumes:
+      - ./seed-data:/seed
+    entrypoint: >
+      bash -c "
+        sleep 20 &&
+        mongoimport --host mongodb --db eventmanagement --collection events --file /seed/events.json &&
+        mongoimport --host mongodb --db eventmanagement --collection users --file /seed/users.json &&
+        mongoimport --host mongodb --db eventmanagement --collection eventTypes --file /seed/eventTypes.json &&
+        mongoimport --host mongodb --db eventmanagement --collection eventUsers --file /seed/eventUsers.json &&
+        mongoimport --host mongodb --db eventmanagement --collection invitationCodes --file /seed/invitationCodes.json &&
+        mongoimport --host mongodb --db eventmanagement --collection notifications --file /seed/notifications.json
+      "
+
   backend:
     build:
       context: ./eventmanagement
@@ -37,8 +55,15 @@ services:
       context: ./react-frontend
     ports:
       - "3000:3000"
+    volumes:
+      - ./react-frontend:/app    # Mount source code for live reload
+      - /app/node_modules       # Prevent overwrite of node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # (optional) fixes file watching in Docker on some OS
     depends_on:
       - backend
+
+
 
 volumes:
   mongo-data:

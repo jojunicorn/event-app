@@ -6,10 +6,15 @@ import { Event } from '@/models/event';
 import { getEvents, deleteEventById } from '@/apiCalls/event';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 
 export default function EventManagement() {
     const [events, setEvents] = useState<Event[]>([]);
     const [error, setError] = useState('');
+    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+    const [eventToDelete, setEventToDelete] = useState<string | null>(null);
+
+    const router = useRouter();
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -25,19 +30,47 @@ export default function EventManagement() {
         fetchEvents();
     }, []);
 
-    const handleDelete = async (eventId: string | undefined) => {
-        if (!eventId) return;
+    const confirmDelete = async () => {
+        if (!eventToDelete) return;
         try {
-            await deleteEventById(eventId);
-            setEvents(prev => prev.filter(event => event.id !== eventId));
+            await deleteEventById(eventToDelete);
+            setEvents(prev => prev.filter(event => event.id !== eventToDelete));
+            setShowConfirmPopup(false);
+            setEventToDelete(null);
         } catch (err) {
             setError('Failed to delete event.');
             console.error(err);
+            setShowConfirmPopup(false);
+            setEventToDelete(null);
         }
     };
 
+    const cancelDelete = () => {
+        setShowConfirmPopup(false);
+        setEventToDelete(null);
+    };
+
+
+    const handleEdit = (eventId: string | undefined) => {
+        if (!eventId) return;
+        router.push(`/events/edit/${eventId}`);
+    };
+
     return (
+
         <div className={styles.container}>
+            {showConfirmPopup && (
+                <div className={styles.popupOverlay}>
+                    <div className={styles.confirmPopup}>
+                        <p>Are you sure you want to cancel this event?</p>
+                        <div className={styles.popupButtons}>
+                            <button onClick={confirmDelete} className={styles.confirmButton}>Yes, delete</button>
+                            <button onClick={cancelDelete} className={styles.cancelButton}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <h2 className={styles.heading}>Event Management</h2>
             {error && <p className={styles.error}>{error}</p>}
 
@@ -80,12 +113,15 @@ export default function EventManagement() {
                                 <td>{event.accessType}</td>
                                 <td>{event.maxParticipants}</td>
                                 <td className={styles.actions}>
-                                    <button className={styles.edit}>
+                                    <button className={styles.edit} onClick={() => handleEdit(event.id)}>
                                         <FontAwesomeIcon icon={faPen} />
                                     </button>
                                     <button
                                         className={styles.delete}
-                                        onClick={() => handleDelete(event.id)}
+                                        onClick={() => {
+                                            setEventToDelete(event.id ?? null);
+                                            setShowConfirmPopup(true);
+                                        }}
                                     >
                                         <FontAwesomeIcon icon={faTrash} />
                                     </button>

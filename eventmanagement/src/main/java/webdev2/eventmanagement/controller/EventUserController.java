@@ -3,7 +3,9 @@ package webdev2.eventmanagement.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import webdev2.eventmanagement.model.Event;
 import webdev2.eventmanagement.model.EventUser;
+import webdev2.eventmanagement.model.User;
 import webdev2.eventmanagement.model.enums.EventUserStatus;
 import webdev2.eventmanagement.service.EventUserService;
 
@@ -32,13 +34,25 @@ public class EventUserController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<Object> getUserEvents(@PathVariable String userId) {
         try {
-            List<EventUser> userEvents = eventUserService.getUserEvents(userId);
-            return ResponseEntity.ok(userEvents);
+            List<Event> usersEvents = eventUserService.getUserEvents(userId);
+            return ResponseEntity.ok(usersEvents);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error retrieving user events: " + e.getMessage());
         }
     }
+
+    @GetMapping("/approveNeeded")
+    public ResponseEntity<Object> getUsersWaitingForApproval(@RequestParam String eventId) {
+        try {
+            List<User> users = eventUserService.getUsersWaitingForApproval(eventId);
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error retrieving user events: " + e.getMessage());
+        }
+    }
+
 
     @GetMapping("/{eventId}/{userId}")
     public ResponseEntity<Object> getUserEventStatus(@PathVariable String eventId, @PathVariable String userId) {
@@ -51,11 +65,10 @@ public class EventUserController {
         }
     }
 
-    // 🔹 Register a user for an event (with PENDING status)
     @PostMapping("/register")
     public ResponseEntity<Object> registerUserForEvent(@RequestParam String eventId, @RequestParam String userId) {
         try {
-            EventUser eventUser = eventUserService.registerUserForEvent(eventId, userId);
+            EventUser eventUser = eventUserService.registerUserForEvent(eventId, userId, false);
             return ResponseEntity.status(HttpStatus.CREATED).body(eventUser);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -76,8 +89,7 @@ public class EventUserController {
         }
     }
 
-    // 🔹 Update a user's event status (Approve or Deny registration)
-    @PatchMapping("/{eventId}/{userId}")
+    @PutMapping("/{eventId}/{userId}")
     public ResponseEntity<Object> updateEventUserStatus(
             @PathVariable String eventId,
             @PathVariable String userId,
@@ -93,7 +105,6 @@ public class EventUserController {
         }
     }
 
-    // 🔹 Remove a user from an event
     @DeleteMapping("/{eventId}/{userId}")
     public ResponseEntity<Object> removeUserFromEvent(@PathVariable String eventId, @PathVariable String userId) {
         try {
